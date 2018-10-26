@@ -1,6 +1,6 @@
 <template>
 <el-container>
-  <tip :tipProp="tipProp" v-if="showFlag" />
+  <span  id="tip" class="right-dropdown-tip" ></span>
   <el-aside width="200px" >
     <div class="mytree-wrap">
       <Mytree/>
@@ -18,6 +18,7 @@
 </el-container>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 import Mytree from '../components/tree.vue'
 import Dialog from '../components/dialog.vue'
 import DorpdownRight from '../components/dorpdownRight.vue'
@@ -59,6 +60,12 @@ export default {
     Mytree,
     Dialog,
     DorpdownRight
+  },
+  computed: {
+    ...mapGetters('tip',{
+				tipProp: 'getTipProp',
+				tipFlag: 'getTipFlag'
+			})
   }
 }
 </script>
@@ -75,5 +82,19 @@ export default {
 .mytree-wrap{
   margin-top: 20px;
   margin-left: 20px;
+}
+.right-dropdown-tip{
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  background: #2f8ff3;
+  font-size: 14px;
+  line-height: 40px;
+  color: #fff;
+  box-shadow: 2px 4px 10px #a6b9e6;
+  -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+  z-index:99999;
 }
 </style>

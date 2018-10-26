@@ -3,23 +3,30 @@ export default (Vue) => {
   Vue.directive('drag', {
     // 当被绑定的元素插入到 DOM 中时……
     inserted: function (el) {
-    // 获取当前元素
-      let odiv = el
-      odiv.onmousedown = (e) => {
-        // 算出鼠标相对元素的位置
-        let disX = e.clientX - odiv.offsetLeft
-        let disY = e.clientY - odiv.offsetTop
+      // 获取tip
+      let tip = document.getElementById('tip')
+      // 给当前元素绑定事件
+      el.onmousedown = (e) => {
+        // 鼠标按下，计算鼠标滑动的距离
+        // let oX = e.clientX
+        // let oY = e.clientY
         document.onmousemove = (e) => {
+          // if (Math.abs(e.clientX - oX) > 20 || Math.abs(e.clientY - oY) > 20) {
+          tip.style.display = 'inline-block'
+          el.classList.add('activeClass')
+          // }
           // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-          let left = e.clientX - disX
-          let top = e.clientY - disY
+          let left = e.clientX - tip.clientWidth / 2
+          let top = e.clientY - tip.clientHeight / 2
           // 移动当前元素
-          odiv.style.left = left + 'px'
-          odiv.style.top = top + 'px'
+          tip.style.left = left + 'px'
+          tip.style.top = top + 'px'
         }
         document.onmouseup = (e) => {
           document.onmousemove = null
           document.onmouseup = null
+          tip.style.display = 'none'
+          el.classList.remove('activeClass')
         }
       }
     }

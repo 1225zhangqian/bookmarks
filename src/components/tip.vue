@@ -1,17 +1,10 @@
 <template>
-<span class="right-dropdown-tip" :style="tipProp.tipPsition" v-drag>{{tipProp.tipMsg}}</span>
+<span  class="right-dropdown-tip" :style="tipProp.tipPsition" >{{tipProp.tipMsg}}</span>
 </template>
 <script>
 export default {
   name: 'tip',
   props: ['tipProp'],
-  data () {
-    return {
-
-    }
-  },
-  methods: {
-  },
 }
 </script>
 <style scoped>

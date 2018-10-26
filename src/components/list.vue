@@ -3,8 +3,8 @@
     <el-card class="box-card">
       <div v-for="(item, index) in listData"
       :key="index" :class="[currentIndex==index ? 'activeClass' : '', 'svn-content']"
-      @click="clickFun(index)"
-      @mousedown="mousemoveFun">
+      @click.prevent="clickFun(index)"
+      v-drag>
         <p><span class="svn-icon"></span>{{item.name}} </p>
         <i class="el-icon-star-on"></i>
         <el-dropdown class="pull-right" @command="handleCommand">
@@ -25,17 +25,15 @@
 </div>
 </template>
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import Dialog from './dialog.vue'
 export default {
   name: 'Home',
   data () {
     return {
-      showFlag:false,
-      currentIndex: '',
+      currentIndex: null,
       dialogTitle: '修改书签',
-      dialogFormVisible : false ,
-      tipProp: {},
+      dialogFormVisible: false,
       formData: [
         { type: 'text', label: '名称', content: '百度脑图－便捷的思维工具', author: 'ddd' },
         { type: 'text', label: '网址', content: 'http://naotu.baidu.com/file/efa67178555208dd7ad28068c3b6ed2f?token=11569b53ef03ab01&qq-pf-to=pcqq.c2c', author: 'ddd' }
@@ -47,18 +45,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions('tip', [
+      'setTipProp',
+      'setTipFlag'
+    ]),
     handleCommand (command) {
       this.dialogFormVisible = true
     },
     clickFun (index) {
-        this.currentIndex = index
-    },
-    mousemoveFun (e) {
-      this.tipProp.tipMsg = {
-        'top': e.clientY + 'px',
-        'left': e.clientX + 'px'
-      }
-      this.showFlag = true
+      this.currentIndex = index
     }
   },
   components: {
@@ -82,7 +77,7 @@ export default {
     cursor: pointer;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
   }
- .svn-content:hover, .activeClass{
+.activeClass{
    background: #ebf2fd;
  }
   .svn-icon{

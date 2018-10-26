@@ -5,7 +5,7 @@ import getters from './getters.js'
 import mutations from './mutations.js'
 import actions from './actions.js'
 import login from './modules/login.js'
-
+import tip from './modules/tip.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,6 +14,7 @@ export default new Vuex.Store({
   mutations,
   actions,
   modules: {
-    login
+    login,
+    tip
   }
 })
