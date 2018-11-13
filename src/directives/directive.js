@@ -8,13 +8,14 @@ export default (Vue) => {
       // 给当前元素绑定事件
       el.onmousedown = (e) => {
         // 鼠标按下，计算鼠标滑动的距离
-        // let oX = e.clientX
-        // let oY = e.clientY
+        let oX = e.clientX
+        let oY = e.clientY
         document.onmousemove = (e) => {
-          // if (Math.abs(e.clientX - oX) > 20 || Math.abs(e.clientY - oY) > 20) {
+          if (Math.sqrt((oX - e.clientX) * (oX - e.clientX) + (oY - e.clientY) * (oY - e.clientY)) <= 1) {
+            return false
+          }
           tip.style.display = 'inline-block'
           el.classList.add('activeClass')
-          // }
           // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
           let left = e.clientX - tip.clientWidth / 2
           let top = e.clientY - tip.clientHeight / 2

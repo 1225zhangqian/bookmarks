@@ -52,7 +52,7 @@ export default {
     dropdownRightClick (val) {
       this.dropdownVisible = false
       this.dialogTitle = val
-      this.formData = val==="添加新书签" ? this.formData : [{ type: 'text', label: '名称', content: '', author: 'ddd' }]
+      this.formData = val==='添加新书签' ? this.formData : [{ type: 'text', label: '名称', content: '', author: 'ddd' }]
       this.dialogFormVisible = true
     }
   },
@@ -63,9 +63,9 @@ export default {
   },
   computed: {
     ...mapGetters('tip',{
-				tipProp: 'getTipProp',
-				tipFlag: 'getTipFlag'
-			})
+      tipProp: 'getTipProp',
+      tipFlag: 'getTipFlag'
+		})
   }
 }
 </script>

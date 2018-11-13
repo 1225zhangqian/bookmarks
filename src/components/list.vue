@@ -3,10 +3,11 @@
     <el-card class="box-card">
       <div v-for="(item, index) in listData"
       :key="index" :class="[currentIndex==index ? 'activeClass' : '', 'svn-content']"
-      @click.prevent="clickFun(index)"
+      @click="clickFun(index)"
       v-drag>
         <p><span class="svn-icon"></span>{{item.name}} </p>
         <i class="el-icon-star-on"></i>
+        <span :class="[currentIndex==index ? 'activeUrl':'','hide']">{{item.url}}</span>
         <el-dropdown class="pull-right" @command="handleCommand">
           <span class="el-dropdown-link">
             <el-button icon="el-icon-more" circle ></el-button>
@@ -77,9 +78,9 @@ export default {
     cursor: pointer;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
   }
-.activeClass{
-   background: #ebf2fd;
- }
+  .activeClass{
+    background: #ebf2fd;
+  }
   .svn-icon{
     display: inline-block;
     vertical-align: middle;
@@ -87,5 +88,13 @@ export default {
     height: 30px;
     background: url(../assets/svn.png);
     background-repeat: no-repeat;
+  }
+  .hide{
+    display:none;
+  }
+  .activeUrl{
+    display:inline-block;
+    padding-left: 20px;
+    color: #838486;
   }
 </style>
